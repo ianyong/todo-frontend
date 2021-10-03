@@ -3,36 +3,39 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { useDispatch } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
 import TodoForm, { TodoFormData } from '../forms/TodoForm';
-import { TodoPostData } from '../types/todos';
-import { createTodo } from '../store/todos/operations';
+import { TodoData, TodoPutData } from '../types/todos';
+import { updateTodo } from '../store/todos/operations';
 
 interface Props {
+  todo: TodoData;
   isOpen: boolean;
   handleClose: () => void;
 }
 
-const TodoAddDialog: React.FunctionComponent<Props> = ({ isOpen, handleClose }: Props) => {
+const TodoEditDialog: React.FunctionComponent<Props> = ({ todo, isOpen, handleClose }: Props) => {
   const dispatch = useDispatch();
-  const handleAdd = async (todoFormData: TodoFormData) => {
-    const todoPostData: TodoPostData = {
+  const handleUpdate = async (todoFormData: TodoFormData) => {
+    const todoPutData: TodoPutData = {
       ...todoFormData,
+      id: todo.id,
+      isCompleted: todo.isCompleted,
     };
-    dispatch(createTodo(todoPostData));
+    dispatch(updateTodo(todoPutData));
     handleClose();
   };
 
   const initialValues: TodoFormData = {
-    name: '',
-    description: '',
-    dueDate: new Date(),
+    name: todo.name,
+    description: todo.description,
+    dueDate: todo.dueDate,
   };
 
   return (
     <Dialog open={isOpen} maxWidth="md" fullWidth scroll="paper">
-      <Formik initialValues={initialValues} onSubmit={handleAdd} validateOnMount>
+      <Formik initialValues={initialValues} onSubmit={handleUpdate} validateOnMount>
         {(formikProps: FormikProps<TodoFormData>) => (
           <>
-            <DialogTitle>Add todo</DialogTitle>
+            <DialogTitle>Edit todo</DialogTitle>
             <DialogContent>
               <TodoForm />
             </DialogContent>
@@ -42,7 +45,7 @@ const TodoAddDialog: React.FunctionComponent<Props> = ({ isOpen, handleClose }: 
                 onClick={formikProps.handleSubmit as any}
                 disabled={formikProps.isSubmitting || !formikProps.isValid}
               >
-                Add
+                Edit
               </Button>
               <Button color="primary" onClick={handleClose}>
                 Cancel
@@ -55,4 +58,4 @@ const TodoAddDialog: React.FunctionComponent<Props> = ({ isOpen, handleClose }: 
   );
 };
 
-export default TodoAddDialog;
+export default TodoEditDialog;

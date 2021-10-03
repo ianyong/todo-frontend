@@ -10,6 +10,7 @@ import { getTodo } from '../store/todos/selectors';
 import { loadTodo } from '../store/todos/operations';
 import formatDate from '../utils/date';
 import TodoDeleteDialog from './TodoDeleteDialog';
+import TodoEditDialog from './TodoEditDialog';
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -44,6 +45,12 @@ const TodoViewDialog: React.FunctionComponent<Props> = ({ todoId, isOpen, handle
     setIsDeleteDialogOpen(true);
   };
 
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const openEditDialog = () => {
+    handleClose();
+    setIsEditDialogOpen(true);
+  };
+
   if (!todo) {
     return <></>;
   }
@@ -73,13 +80,16 @@ const TodoViewDialog: React.FunctionComponent<Props> = ({ todoId, isOpen, handle
           <Button color="secondary" onClick={openDeleteDialog}>
             Delete
           </Button>
-          <Button color="secondary">Edit</Button>
+          <Button color="secondary" onClick={openEditDialog}>
+            Edit
+          </Button>
           <Button color="primary" onClick={handleClose}>
             Close
           </Button>
         </DialogActions>
       </Dialog>
       <TodoDeleteDialog todo={todo} isOpen={isDeleteDialogOpen} handleClose={() => setIsDeleteDialogOpen(false)} />
+      <TodoEditDialog todo={todo} isOpen={isEditDialogOpen} handleClose={() => setIsEditDialogOpen(false)} />
     </>
   );
 };
