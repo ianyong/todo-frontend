@@ -5,6 +5,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterMoment';
 import { makeStyles } from '@mui/styles';
+import * as Yup from 'yup';
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -18,9 +19,14 @@ export interface TodoFormData {
   dueDate: Date;
 }
 
+export const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  dueDate: Yup.date().required('Due Date is required'),
+});
+
 const TodoForm: React.FunctionComponent = () => {
   const classes = useStyles();
-  const { handleChange, setFieldValue, values } = useFormikContext<TodoFormData>();
+  const { errors, handleChange, setFieldTouched, setFieldValue, touched, values } = useFormikContext<TodoFormData>();
 
   return (
     <Form className={classes.form}>
@@ -30,7 +36,10 @@ const TodoForm: React.FunctionComponent = () => {
             name="name"
             label="Name"
             value={values.name}
-            onChange={(event) => handleChange(event)}
+            onChange={handleChange}
+            onBlur={() => setFieldTouched('name')}
+            error={touched.name && Boolean(errors.name)}
+            helperText={touched.name ? errors.name : ''}
             variant="outlined"
             fullWidth
             required
@@ -41,8 +50,18 @@ const TodoForm: React.FunctionComponent = () => {
             <DatePicker
               label="Due Date"
               value={values.dueDate}
-              onChange={(date) => setFieldValue('dueDate', date)}
-              renderInput={(params) => <TextField {...params} required />}
+              onChange={(date) => {
+                setFieldValue('dueDate', date);
+                setFieldTouched('dueDate');
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={touched.dueDate && Boolean(errors.dueDate)}
+                  helperText={touched.dueDate ? errors.dueDate : ''}
+                  required
+                />
+              )}
             />
           </LocalizationProvider>
         </Grid>
@@ -51,7 +70,10 @@ const TodoForm: React.FunctionComponent = () => {
             name="description"
             label="Description"
             value={values.description}
-            onChange={(event) => handleChange(event)}
+            onChange={handleChange}
+            onBlur={() => setFieldTouched('description')}
+            error={touched.description && Boolean(errors.description)}
+            helperText={touched.description ? errors.description : ''}
             variant="outlined"
             fullWidth
             multiline

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
-import TodoForm, { TodoFormData } from '../forms/TodoForm';
+import TodoForm, { TodoFormData, validationSchema } from '../forms/TodoForm';
 import { TodoData, TodoPutData } from '../types/todos';
 import { updateTodo } from '../store/todos/operations';
 
@@ -32,7 +32,7 @@ const TodoEditDialog: React.FunctionComponent<Props> = ({ todo, isOpen, handleCl
 
   return (
     <Dialog open={isOpen} maxWidth="md" fullWidth scroll="paper">
-      <Formik initialValues={initialValues} onSubmit={handleUpdate} validateOnMount>
+      <Formik initialValues={initialValues} onSubmit={handleUpdate} validationSchema={validationSchema} validateOnMount>
         {(formikProps: FormikProps<TodoFormData>) => (
           <>
             <DialogTitle>Edit todo</DialogTitle>

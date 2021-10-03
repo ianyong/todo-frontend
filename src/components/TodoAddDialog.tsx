@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
-import TodoForm, { TodoFormData } from '../forms/TodoForm';
+import TodoForm, { TodoFormData, validationSchema } from '../forms/TodoForm';
 import { TodoPostData } from '../types/todos';
 import { createTodo } from '../store/todos/operations';
 
@@ -29,7 +29,7 @@ const TodoAddDialog: React.FunctionComponent<Props> = ({ isOpen, handleClose }: 
 
   return (
     <Dialog open={isOpen} maxWidth="md" fullWidth scroll="paper">
-      <Formik initialValues={initialValues} onSubmit={handleAdd} validateOnMount>
+      <Formik initialValues={initialValues} onSubmit={handleAdd} validationSchema={validationSchema} validateOnMount>
         {(formikProps: FormikProps<TodoFormData>) => (
           <>
             <DialogTitle>Add todo</DialogTitle>
