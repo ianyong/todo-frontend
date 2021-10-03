@@ -30,9 +30,13 @@
     ],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
-        // Disable base rule and use @typescript-eslint's to prevent incorrect reporting of errors.
+        // Disable base rules and use @typescript-eslint's to prevent incorrect reporting of errors.
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"],
         "import/extensions": [
             "error",
             "ignorePackages",
