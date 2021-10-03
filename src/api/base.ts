@@ -39,47 +39,47 @@ function processRequest<D>(endpoint: string, promise: AxiosPromise<ApiResponse<D
 
 class BaseAPI {
   private client = axios.create({
-    baseURL: 'localhost:8000',
+    baseURL: 'localhost:8000/api/v1',
   });
 
-  private clientGet<D>(url: string, params?: AxiosRequestConfig<D>): AxiosPromise<ApiResponse<D>> {
+  private clientGet<D, R>(url: string, params?: AxiosRequestConfig<D>): AxiosPromise<ApiResponse<R>> {
     return this.client.get(url, params);
   }
 
-  private clientPost<D>(url: string, data: D): AxiosPromise<ApiResponse<D>> {
+  private clientPost<D, R>(url: string, data: D): AxiosPromise<ApiResponse<R>> {
     return this.client.post(url, data);
   }
 
-  private clientPut<D>(url: string, data: D): AxiosPromise<ApiResponse<D>> {
+  private clientPut<D, R>(url: string, data: D): AxiosPromise<ApiResponse<R>> {
     return this.client.put(url, data);
   }
 
-  private clientPatch<D>(url: string, data: D): AxiosPromise<ApiResponse<D>> {
+  private clientPatch<D, R>(url: string, data: D): AxiosPromise<ApiResponse<R>> {
     return this.client.patch(url, data);
   }
 
-  private clientDelete<D>(url: string): AxiosPromise<ApiResponse<D>> {
+  private clientDelete<R>(url: string): AxiosPromise<ApiResponse<R>> {
     return this.client.delete(url);
   }
 
-  protected get<D>(url: string, params?: AxiosRequestConfig<D>): ApiPromise<D> {
+  protected get<D, R>(url: string, params?: AxiosRequestConfig<D>): ApiPromise<R> {
     return processRequest(url, this.clientGet(url, params));
   }
 
-  protected post<D>(url: string, data: D): ApiPromise<D> {
+  protected post<D, R>(url: string, data: D): ApiPromise<R> {
     return processRequest(url, this.clientPost(url, data));
   }
 
-  protected put<D>(url: string, data: D): ApiPromise<D> {
+  protected put<D, R>(url: string, data: D): ApiPromise<R> {
     return processRequest(url, this.clientPut(url, data));
   }
 
-  protected patch<D>(url: string, data: D): ApiPromise<D> {
+  protected patch<D, R>(url: string, data: D): ApiPromise<R> {
     return processRequest(url, this.clientPatch(url, data));
   }
 
-  protected delete<D>(url: string): ApiPromise<D> {
-    return processRequest(url, this.clientDelete<D>(url));
+  protected delete<R>(url: string): ApiPromise<R> {
+    return processRequest(url, this.clientDelete(url));
   }
 }
 
