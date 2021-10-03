@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Chip, Grid, Paper, Typography } from '@mui/material';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import moment from 'moment';
 import { TodoListData } from '../types/todos';
 import TodoViewDialog from './TodoViewDialog';
+import formatDate from '../utils/date';
 
 const PaperStyle: React.CSSProperties = {
   margin: '20px',
@@ -26,11 +26,7 @@ const TodoListItem: React.FunctionComponent<Props> = ({ todo }: Props) => {
             <Typography variant="h4">{todo.name}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Chip
-              icon={<DateRangeIcon />}
-              variant="outlined"
-              label={`Due ${moment(todo.dueDate).format('D MMMM YYYY')}`}
-            />
+            <Chip icon={<DateRangeIcon />} variant="outlined" label={`Due ${formatDate(todo.dueDate)}`} />
           </Grid>
         </Grid>
       </Paper>

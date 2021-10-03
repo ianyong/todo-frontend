@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { TodoData } from '../types/todos';
 import { AppState } from '../store/store';
 import { getTodo } from '../store/todos/selectors';
 import { loadTodo } from '../store/todos/operations';
+import formatDate from '../utils/date';
 
 const IconStyle: React.CSSProperties = {
   paddingRight: '15px',
@@ -46,7 +46,7 @@ const TodoViewDialog: React.FunctionComponent<Props> = ({ todoId, isOpen, onClos
           <Grid item xs={12}>
             <Box style={RowStyle}>
               <DateRangeOutlinedIcon color="primary" style={IconStyle} />
-              <Typography>{moment(todo.dueDate).format('D MMMM YYYY')}</Typography>
+              <Typography>{formatDate(todo.dueDate)}</Typography>
             </Box>
           </Grid>
           <Grid item xs={12}>
