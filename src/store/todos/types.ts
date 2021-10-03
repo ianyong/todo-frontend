@@ -8,7 +8,7 @@ export const REMOVE_TODO = 'todos/REMOVE_TODO';
 // Action types
 export interface SaveTodosListAction {
   type: typeof SAVE_TODOS_LIST;
-  todosList: TodoListData[];
+  todoList: TodoListData[];
 }
 
 export interface SaveTodoAction {

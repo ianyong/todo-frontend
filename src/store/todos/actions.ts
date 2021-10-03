@@ -8,10 +8,10 @@ import {
   SaveTodosListAction,
 } from './types';
 
-export function saveTodosList(todosList: TodoListData[]): SaveTodosListAction {
+export function saveTodosList(todoList: TodoListData[]): SaveTodosListAction {
   return {
     type: SAVE_TODOS_LIST,
-    todosList,
+    todoList,
   };
 }
 
