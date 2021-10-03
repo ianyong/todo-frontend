@@ -18,7 +18,7 @@ const TodoListItem: React.FunctionComponent<Props> = ({ todo }: Props) => (
   <Paper style={PaperStyle}>
     <Grid container>
       <Grid item xs={12}>
-        <Typography variant="h2">{todo.name}</Typography>
+        <Typography variant="h4">{todo.name}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Chip icon={<DateRangeIcon />} variant="outlined" label={`Due ${moment(todo.dueDate).format('D MMMM YYYY')}`} />
