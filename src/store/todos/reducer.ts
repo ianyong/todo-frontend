@@ -28,7 +28,7 @@ const todosReducer = produce((draft: TodosState, action: TodoActionTypes) => {
       break;
     }
     default: {
-      throw new Error('Todos reducer encountered unexpected action.');
+      break;
     }
   }
 }, initialState);
