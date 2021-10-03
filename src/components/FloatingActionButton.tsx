@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { makeStyles } from '@mui/styles';
+import TodoAddDialog from './TodoAddDialog';
 
 const useStyles = makeStyles(() => ({
   fab: {
@@ -19,11 +20,15 @@ const useStyles = makeStyles(() => ({
 
 const FloatingActionButton: React.FunctionComponent = () => {
   const classes = useStyles();
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
   return (
-    <Fab className={classes.fab}>
-      <AddIcon />
-    </Fab>
+    <>
+      <Fab className={classes.fab} onClick={() => setIsAddDialogOpen(true)}>
+        <AddIcon />
+      </Fab>
+      <TodoAddDialog isOpen={isAddDialogOpen} handleClose={() => setIsAddDialogOpen(false)} />
+    </>
   );
 };
 

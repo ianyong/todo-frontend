@@ -31,6 +31,7 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
         "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["draft"] }],
+        "react/jsx-props-no-spreading": "off",
         // Disable base rules and use @typescript-eslint's to prevent incorrect reporting of errors.
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
