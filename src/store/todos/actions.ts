@@ -1,5 +1,7 @@
 import { TodoData, TodoListData } from '../../types/todos';
 import {
+  ADD_TODO,
+  AddTodoAction,
   REMOVE_TODO,
   RemoveTodoAction,
   SAVE_TODO,
@@ -8,7 +10,7 @@ import {
   SaveTodosListAction,
 } from './types';
 
-export function saveTodosList(todoList: TodoListData[]): SaveTodosListAction {
+export function saveTodoList(todoList: TodoListData[]): SaveTodosListAction {
   return {
     type: SAVE_TODOS_LIST,
     todoList,
@@ -18,6 +20,13 @@ export function saveTodosList(todoList: TodoListData[]): SaveTodosListAction {
 export function saveTodo(todo: TodoData): SaveTodoAction {
   return {
     type: SAVE_TODO,
+    todo,
+  };
+}
+
+export function addTodo(todo: TodoData): AddTodoAction {
+  return {
+    type: ADD_TODO,
     todo,
   };
 }
