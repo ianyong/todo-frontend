@@ -30,7 +30,7 @@ const TodoListItem: React.FunctionComponent<Props> = ({ todo }: Props) => {
           </Grid>
         </Grid>
       </Paper>
-      <TodoViewDialog todoId={todo.id} isOpen={isSelected} onClose={() => setIsSelected(false)} />
+      <TodoViewDialog todoId={todo.id} isOpen={isSelected} handleClose={() => setIsSelected(false)} />
     </>
   );
 };
