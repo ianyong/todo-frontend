@@ -1,6 +1,7 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "todo-list",
+  "version": "1.0.0",
+  "homepage": "https://ianyong.github.io/todo-frontend",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -14,6 +15,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.22.0",
     "formik": "^2.2.9",
+    "gh-pages": "^3.2.3",
     "immer": "^9.0.6",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -28,6 +30,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
+    "predeploy": "cp .env.deployment .env && npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
