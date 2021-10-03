@@ -39,7 +39,7 @@ function processRequest<D>(endpoint: string, promise: AxiosPromise<ApiResponse<D
 
 class BaseAPI {
   private client = axios.create({
-    baseURL: 'localhost:8000/api/v1',
+    baseURL: 'http://localhost:8000/api/v1',
   });
 
   private clientGet<D, R>(url: string, params?: AxiosRequestConfig<D>): AxiosPromise<ApiResponse<R>> {
