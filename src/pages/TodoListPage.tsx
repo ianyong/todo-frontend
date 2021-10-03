@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import TodoList from '../components/TodoList';
 import { loadAllTodos } from '../store/todos/operations';
 import TodoListHeader from '../components/TodoListHeader';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 const TodoListPage: React.FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const TodoListPage: React.FunctionComponent = () => {
     <>
       <TodoListHeader />
       <TodoList />
+      <FloatingActionButton />
     </>
   );
 };
