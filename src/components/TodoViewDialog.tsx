@@ -3,6 +3,7 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, T
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 import { TodoData } from '../types/todos';
 import { AppState } from '../store/store';
 import { getTodo } from '../store/todos/selectors';
@@ -10,15 +11,16 @@ import { loadTodo } from '../store/todos/operations';
 import formatDate from '../utils/date';
 import TodoDeleteDialog from './TodoDeleteDialog';
 
-const IconStyle: React.CSSProperties = {
-  paddingRight: '15px',
-};
-
-const RowStyle: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-};
+const useStyles = makeStyles(() => ({
+  icon: {
+    paddingRight: '15px',
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+}));
 
 interface Props {
   todoId: number;
@@ -27,6 +29,7 @@ interface Props {
 }
 
 const TodoViewDialog: React.FunctionComponent<Props> = ({ todoId, isOpen, handleClose }: Props) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     if (isOpen) {
@@ -52,14 +55,14 @@ const TodoViewDialog: React.FunctionComponent<Props> = ({ todoId, isOpen, handle
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Box style={RowStyle}>
-                <DateRangeOutlinedIcon color="primary" style={IconStyle} />
+              <Box className={classes.row}>
+                <DateRangeOutlinedIcon color="primary" className={classes.icon} />
                 <Typography>{formatDate(todo.dueDate)}</Typography>
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <Box style={RowStyle}>
-                <DescriptionOutlinedIcon color="primary" style={IconStyle} />
+              <Box className={classes.row}>
+                <DescriptionOutlinedIcon color="primary" className={classes.icon} />
                 {todo.description && <Typography>{todo.description}</Typography>}
                 {!todo.description && <Typography color="gray">This todo has no description.</Typography>}
               </Box>
