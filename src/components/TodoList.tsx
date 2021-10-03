@@ -10,9 +10,11 @@ const TodoList: React.FunctionComponent = () => {
 
   return (
     <>
-      {todos.map((todo: TodoListData) => (
-        <TodoListItem todo={todo} key={todo.id} />
-      ))}
+      {[...todos]
+        .sort((a, b) => a.dueDate.valueOf() - b.dueDate.valueOf())
+        .map((todo: TodoListData) => (
+          <TodoListItem todo={todo} key={todo.id} />
+        ))}
     </>
   );
 };
