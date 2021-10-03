@@ -7,6 +7,7 @@ import TodoListItem from './TodoListItem';
 
 const TodoList: React.FunctionComponent = () => {
   const todos: TodoListData[] = useSelector((state: AppState) => getTodoList(state));
+
   return (
     <>
       {todos.map((todo: TodoListData) => (

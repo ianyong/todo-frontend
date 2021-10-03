@@ -9,6 +9,7 @@ const TodoListPage: React.FunctionComponent = () => {
   useEffect(() => {
     dispatch(loadAllTodos());
   }, []);
+
   return (
     <>
       <TodoListHeader />
