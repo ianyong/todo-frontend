@@ -39,7 +39,7 @@ function processRequest<D>(endpoint: string, promise: AxiosPromise<ApiResponse<D
 
 class BaseAPI {
   private client = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: window.env.BASE_SERVER_URL,
   });
 
   private clientGet<D, R>(url: string, params?: AxiosRequestConfig<D>): AxiosPromise<ApiResponse<R>> {
